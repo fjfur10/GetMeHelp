@@ -31,17 +31,31 @@
                                 <rect key="frame" x="87" y="595" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellReuseIdentifier" id="zp6-04-NY6">
+                                        <rect key="frame" x="0.0" y="28" width="240" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zp6-04-NY6" id="nek-tS-Dng">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgg-LC-azy">
-                                <rect key="frame" x="139" y="337" width="136" height="30"/>
+                                <rect key="frame" x="127" y="337" width="136" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Search Near Me!"/>
+                                <connections>
+                                    <action selector="didTouchDoneButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cag-9N-gab"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
+                        <outlet property="doneButton" destination="Cgg-LC-azy" id="0Fv-VD-0dM"/>
                         <outlet property="optionPicker" destination="76G-M3-0ak" id="T1K-RP-fkz"/>
                         <outlet property="tableView" destination="daX-T9-SY1" id="eI5-i8-rNZ"/>
                         <outlet property="titleLabel" destination="bEW-AZ-J9I" id="nO2-Ci-SI9"/>
