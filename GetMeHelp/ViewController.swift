@@ -7,7 +7,9 @@
 
 import UIKit
 import RadarSDK
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
+import CoreLocation
+
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource  {
     
     @IBOutlet weak var doneButton: UIButton!
     
@@ -16,14 +18,29 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var optionPicker: UIPickerView!
     
     @IBOutlet weak var tableView: UITableView!
+
+    var locationManager = CLLocationManager()
     
     var pickerData = [String : String]()
     var placeArr = [RadarPlace]()
     let test = ["Test"]
+    var lat = 1.0
+    var long = 1.0
     override func viewDidLoad() {
         super.viewDidLoad()
         
         pickerData = ["Doctors" : "doctor", "Medical Centers" : "medical-center", "Medical Services" : "medical-service", "Pharmacies" : "pharmacy"]
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
         titleLabel.text = "GetMeHelp!"
         titleLabel.isHidden = false
         optionPicker.dataSource = self
@@ -43,7 +60,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @IBAction func didTouchDoneButton(_ sender: UIButton) {
-        let loc = CLLocation(latitude: 42.0566201045534, longitude: -72.55247246362245)
+        let loc = CLLocation(latitude: lat, longitude: long)
         let vals = Array(pickerData.values)
         Radar.searchPlaces(
           near: loc,
@@ -65,6 +82,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        lat = Double(locValue.latitude)
+        long = Double(locValue.longitude)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return placeArr.count
     }

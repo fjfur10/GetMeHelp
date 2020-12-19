@@ -51,6 +51,7 @@
 		990919E3258DAA5E001DFBBD /* GetMeHelpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeHelpUITests.swift; sourceTree = "<group>"; };
 		990919E5258DAA5E001DFBBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		990919FE258DBDAC001DFBBD /* RadarSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RadarSDK.framework; sourceTree = "<group>"; };
+		9DE0FE19258DE62F00E5F140 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +111,7 @@
 				990919CA258DAA5E001DFBBD /* Assets.xcassets */,
 				990919CC258DAA5E001DFBBD /* LaunchScreen.storyboard */,
 				990919CF258DAA5E001DFBBD /* Info.plist */,
+				9DE0FE19258DE62F00E5F140 /* Location.gpx */,
 			);
 			path = GetMeHelp;
 			sourceTree = "<group>";
