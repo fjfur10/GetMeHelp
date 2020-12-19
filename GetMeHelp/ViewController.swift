@@ -7,7 +7,9 @@
 
 import UIKit
 import RadarSDK
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+import CoreLocation
+
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate {
     
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -15,11 +17,26 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var optionPicker: UIPickerView!
     
     @IBOutlet weak var tableView: UITableView!
+
+    var locationManager = CLLocationManager()
     
     var pickerData = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
         
         pickerData = ["Chipotle", "Moe's", "Qdoba", "El Pollo Guapo"]
         titleLabel.text = "GetMeHelp!"
@@ -41,8 +58,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 print(place.name)
             }
         }
+
         
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
