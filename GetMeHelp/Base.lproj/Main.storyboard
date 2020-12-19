@@ -119,12 +119,6 @@
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qt8-f6-dsR">
                                     <rect key="frame" x="8" y="46" width="374" height="712"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="20"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipstoBounds" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="dismisspopUp:" destination="UqJ-mE-DaA" eventType="touchUpInside" id="WTS-o7-kvE"/>
                                     </connections>
@@ -212,12 +206,6 @@
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemGray4Color"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath=".layer.cornerRadius">
-                                            <integer key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath=".layer.clipsToBounds" value="YES"/>
-                                    </userDefinedRuntimeAttributes>
                                 </view>
                             </subviews>
                         </view>
@@ -231,7 +219,6 @@
                         <outlet property="gobutton" destination="wQP-IH-bVk" id="K7a-oo-NGy"/>
                         <outlet property="popUp" destination="gQI-YP-wl0" id="Sqq-OU-deF"/>
                         <outlet property="state" destination="CAR-SN-Skb" id="zuH-sL-eIx"/>
-                        <outlet property="view2" destination="gQI-YP-wl0" id="UPp-BH-cSR"/>
                         <outlet property="zip" destination="bBT-ht-OBk" id="WWp-Q0-Lcs"/>
                     </connections>
                 </viewController>
