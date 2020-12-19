@@ -11,7 +11,7 @@ import CoreLocation
 import MapKit
 
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate  {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, DataEnteredDelegate{
     
     @IBOutlet weak var doneButton: UIButton!
     
@@ -34,6 +34,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     let annotation = MKPointAnnotation()
     
     var placeArr = [RadarPlace]()
+    var addressesarray = [RadarAddress]()
+    
     let test = ["Test"]
     var lat = 1.0
     var long = 1.0
@@ -59,6 +61,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         optionPicker.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
+        
         
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -93,8 +96,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
         }
         
+        
+        
 
     }
+    
+    
+  
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -148,21 +157,39 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
         print(placescoords[ currentCell.textLabel!.text!]!)
         
-        let thiscoor =  placescoords[ currentCell.textLabel!.text!]!
+        let thiscoor =  placescoords[currentCell.textLabel!.text!]!
         
         
-        
-        let uloc = CLLocation(latitude: thiscoor.latitude, longitude: thiscoor.longitude)
-         let regionradius:CLLocationDistance = 1000.0
-         let region = MKCoordinateRegion(center: uloc.coordinate, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
+        let regionradius:CLLocationDistance = 1000.0
+        let region = MKCoordinateRegion(center: thiscoor, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
          mapView.setRegion(region, animated: true)
          mapView.delegate = self
         
         
         
         annotation.coordinate = CLLocationCoordinate2D(latitude: thiscoor.latitude, longitude: thiscoor.longitude)
-         mapView.addAnnotation(annotation)
+        mapView.addAnnotation(annotation)
       
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender:Any?)
+    {
+        if(segue.identifier == "toManualInput"){
+            let secondViewController = segue.destination as! ManLocationViewController
+            secondViewController.delegate = self
+        }
+    }
+    
+    func userDidEnterInformation(info:[String:String]){
+        print(info["street1"]!);
+        Radar.geocode(address: "\(info["street1"]!) \(info["city"]!) \(info["state"]!)"){(status, addresses) in
+            self.addressesarray = addresses!
+            for address in self.addressesarray {
+                print(address.coordinate)
+                self.lat = address.coordinate.latitude
+                self.long = address.coordinate.longitude
+            }
+        }
     }
     
     

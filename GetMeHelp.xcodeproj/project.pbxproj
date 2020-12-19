@@ -17,6 +17,7 @@
 		990919E4258DAA5E001DFBBD /* GetMeHelpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990919E3258DAA5E001DFBBD /* GetMeHelpUITests.swift */; };
 		990919FF258DBDAC001DFBBD /* RadarSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990919FE258DBDAC001DFBBD /* RadarSDK.framework */; };
 		9DE0FE1E258E0ACC00E5F140 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE0FE1D258E0ACC00E5F140 /* File.swift */; };
+		9DE0FE23258E693B00E5F140 /* ManLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE0FE22258E693B00E5F140 /* ManLocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		990919FE258DBDAC001DFBBD /* RadarSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RadarSDK.framework; sourceTree = "<group>"; };
 		9DE0FE19258DE62F00E5F140 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		9DE0FE1D258E0ACC00E5F140 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		9DE0FE22258E693B00E5F140 /* ManLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManLocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				990919CF258DAA5E001DFBBD /* Info.plist */,
 				9DE0FE19258DE62F00E5F140 /* Location.gpx */,
 				9DE0FE1D258E0ACC00E5F140 /* File.swift */,
+				9DE0FE22258E693B00E5F140 /* ManLocationViewController.swift */,
 			);
 			path = GetMeHelp;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				990919C6258DAA5D001DFBBD /* ViewController.swift in Sources */,
 				9DE0FE1E258E0ACC00E5F140 /* File.swift in Sources */,
 				990919C2258DAA5D001DFBBD /* AppDelegate.swift in Sources */,
+				9DE0FE23258E693B00E5F140 /* ManLocationViewController.swift in Sources */,
 				990919C4258DAA5D001DFBBD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
