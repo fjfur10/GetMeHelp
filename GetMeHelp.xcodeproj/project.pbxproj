@@ -15,6 +15,7 @@
 		990919CE258DAA5E001DFBBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 990919CC258DAA5E001DFBBD /* LaunchScreen.storyboard */; };
 		990919D9258DAA5E001DFBBD /* GetMeHelpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990919D8258DAA5E001DFBBD /* GetMeHelpTests.swift */; };
 		990919E4258DAA5E001DFBBD /* GetMeHelpUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990919E3258DAA5E001DFBBD /* GetMeHelpUITests.swift */; };
+		990919FF258DBDAC001DFBBD /* RadarSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 990919FE258DBDAC001DFBBD /* RadarSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		990919DF258DAA5E001DFBBD /* GetMeHelpUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GetMeHelpUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		990919E3258DAA5E001DFBBD /* GetMeHelpUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeHelpUITests.swift; sourceTree = "<group>"; };
 		990919E5258DAA5E001DFBBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		990919FE258DBDAC001DFBBD /* RadarSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RadarSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				990919FF258DBDAC001DFBBD /* RadarSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +86,7 @@
 				990919D7258DAA5E001DFBBD /* GetMeHelpTests */,
 				990919E2258DAA5E001DFBBD /* GetMeHelpUITests */,
 				990919BF258DAA5D001DFBBD /* Products */,
+				990919FE258DBDAC001DFBBD /* RadarSDK.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -438,6 +442,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7J8TB4DPSY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = GetMeHelp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -457,6 +465,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7J8TB4DPSY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = GetMeHelp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

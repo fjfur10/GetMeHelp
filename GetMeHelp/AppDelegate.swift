@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RadarSDK
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        Radar.initialize(publishableKey: "prj_test_pk_dba86d05e3b40c657c45b37c81812286dc2292eb")
         return true
     }
 
