@@ -101,10 +101,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.tableView.reloadData()
             
         }
+        let uloc = CLLocation(latitude: lat, longitude: long)
+         let regionradius:CLLocationDistance = 5000.0
+         let region = MKCoordinateRegion(center: uloc.coordinate, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
+         mapView.setRegion(region, animated: true)
+         mapView.delegate = self
         
-        
-        
-
     }
     
     func locationAlert()
@@ -140,7 +142,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             return
         }
         let uloc = CLLocation(latitude: lat, longitude: long)
-         let regionradius:CLLocationDistance = 1000.0
+         let regionradius:CLLocationDistance = 5000.0
          let region = MKCoordinateRegion(center: uloc.coordinate, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
          mapView.setRegion(region, animated: true)
          mapView.delegate = self
@@ -189,6 +191,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         
         annotation.coordinate = CLLocationCoordinate2D(latitude: thiscoor.latitude, longitude: thiscoor.longitude)
+        annotation.title = currentCell.textLabel?.text!
         mapView.addAnnotation(annotation)
       
     }
@@ -209,12 +212,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 print(address.coordinate)
                 self.lat = address.coordinate.latitude
                 self.long = address.coordinate.longitude
+                self.doneButton.sendActions(for: .touchUpInside)
             }
         }
-        
     }
-    
-    
+        
     
 }
 
