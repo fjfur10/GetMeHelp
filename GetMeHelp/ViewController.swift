@@ -23,8 +23,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet private var mapView: MKMapView!
 
-    @IBOutlet weak var zoomInButton: UIButton!
-    
     var locationManager = CLLocationManager()
     
    
@@ -76,7 +74,16 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @IBAction func didTouchDoneButton(_ sender: UIButton) {
+        if(!CLLocationManager.locationServicesEnabled())
+        {
+            locationAlert()
+        }
         let loc = CLLocation(latitude: lat, longitude: long)
+        print(loc.coordinate.latitude)
+        if(loc.coordinate.latitude == 1.0)
+        {
+            locationAlert()
+        }
         let vals = Array(pickerData.values)
         Radar.searchPlaces(
           near: loc,
@@ -101,7 +108,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
     }
     
-    
+    func locationAlert()
+    {
+        let alert = UIAlertController(title: "Location Services Denied", message: "In order to use this app you must enable location services or enter location manually.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
   
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -123,6 +135,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func homeButtonPressed(_ sender: Any) {
         
+        if(lat == 1.0)
+        {
+            locationAlert()
+            return
+        }
         let uloc = CLLocation(latitude: lat, longitude: long)
          let regionradius:CLLocationDistance = 1000.0
          let region = MKCoordinateRegion(center: uloc.coordinate, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
@@ -190,6 +207,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 self.long = address.coordinate.longitude
             }
         }
+        
     }
     
     
