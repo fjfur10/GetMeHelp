@@ -31,9 +31,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var placescoords=[String: CLLocationCoordinate2D]()
     let annotation = MKPointAnnotation()
     
-    var placeArr = [RadarPlace]()
+    var placeArr = [Place]()
     var addressesarray = [RadarAddress]()
-    
+    var favorites = [RadarPlace]()
     let test = ["Test"]
     var lat = 1.0
     var long = 1.0
@@ -92,21 +92,28 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
           groups: nil,
           limit: 10
         ) { (status, location, places) in
+            self.placeArr = [Place]()
           // do something with places
-            self.placeArr = places!
-            for place in self.placeArr {
+            for place in places! {
                 print(place.name)
                 self.placescoords.updateValue(place.location.coordinate, forKey: place.name)
+                var myPlace = Place(place: place, isFavorite: false)
+                for fav in self.favorites {
+                    if fav._id == myPlace.place._id {
+                        myPlace.isFavorite = true
+                    }
+                }
+                
+                self.placeArr.append(myPlace)
+                
             }
             self.tableView.reloadData()
-            
         }
         let uloc = CLLocation(latitude: lat, longitude: long)
          let regionradius:CLLocationDistance = 5000.0
          let region = MKCoordinateRegion(center: uloc.coordinate, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
          mapView.setRegion(region, animated: true)
          mapView.delegate = self
-        
     }
     
     func locationAlert()
@@ -162,8 +169,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! PlacesCell
         cell.linktoVC = self
-        let text = placeArr[indexPath.row].name
-        let placeLoc = placeArr[indexPath.row].location
+        let text = placeArr[indexPath.row].place.name
+        //cell.accessoryView?.tintColor = placeArr[indexPath.row].isFavorite ? UIColor.red : UIColor.blue
+        cell.drawHeart(toDraw: placeArr[indexPath.row].isFavorite ? "heart.fill" : "heart")
+        let placeLoc = placeArr[indexPath.row].place.location
         var detail = ""
         Radar.getDistance(origin: CLLocation(latitude: lat, longitude: long), destination: CLLocation(latitude: placeLoc.coordinate.latitude, longitude: placeLoc.coordinate.longitude), modes: RadarRouteMode.car, units: RadarRouteUnits.imperial) {(status, route) in
             let myRoute = route!
@@ -217,6 +226,22 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
         
+    func flipFavorite(cell: UITableViewCell) {
+        let indexPath = tableView.indexPath(for: cell)
+        let place = placeArr[indexPath!.row]
+        print(place)
+        let hasFav = place.isFavorite
+        placeArr[indexPath!.row].isFavorite = !hasFav
+        print(placeArr[indexPath!.row])
+        if placeArr[indexPath!.row].isFavorite{
+            favorites.append(placeArr[indexPath!.row].place)
+        }
+        else {
+            favorites.remove(at: favorites.firstIndex(of: placeArr[indexPath!.row].place)!)
+        }
+        print(favorites)
+        tableView.reloadData()
+    }
     
 }
 
