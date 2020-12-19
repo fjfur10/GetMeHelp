@@ -42,6 +42,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nM2-zr-qsn">
+                                <rect key="frame" x="20" y="375" width="354" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgg-LC-azy">
                                 <rect key="frame" x="127" y="337" width="136" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -50,10 +54,6 @@
                                     <action selector="didTouchDoneButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cag-9N-gab"/>
                                 </connections>
                             </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nM2-zr-qsn">
-                                <rect key="frame" x="20" y="375" width="354" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehg-cp-VCO">
                                 <rect key="frame" x="69" y="569" width="30" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -119,6 +119,12 @@
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qt8-f6-dsR">
                                     <rect key="frame" x="8" y="46" width="374" height="712"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="20"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="clipstoBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="dismisspopUp:" destination="UqJ-mE-DaA" eventType="touchUpInside" id="WTS-o7-kvE"/>
                                     </connections>
@@ -193,11 +199,12 @@
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQP-IH-bVk">
-                                            <rect key="frame" x="124" y="361" width="41" height="31"/>
+                                            <rect key="frame" x="110" y="350.66666666666674" width="79" height="42"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" backgroundImage="arrowtriangle.forward.fill" catalog="system">
+                                            <color key="tintColor" systemColor="systemGreenColor"/>
+                                            <state key="normal" title="Go!" backgroundImage="squareshape.fill" catalog="system">
                                                 <color key="titleColor" systemColor="labelColor"/>
-                                                <color key="titleShadowColor" systemColor="labelColor"/>
+                                                <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
                                                 <action selector="sendtextBackButtonWithSender:" destination="UqJ-mE-DaA" eventType="touchUpInside" id="2kB-Gr-0do"/>
@@ -205,6 +212,12 @@
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath=".layer.cornerRadius">
+                                            <integer key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath=".layer.clipsToBounds" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </view>
                             </subviews>
                         </view>
@@ -215,7 +228,10 @@
                         <outlet property="SL1" destination="68p-3r-7Vw" id="EQz-2p-QxD"/>
                         <outlet property="SL2" destination="86X-dO-Oa6" id="E2F-HR-KQ6"/>
                         <outlet property="city" destination="ZfZ-FT-gxJ" id="4fw-cT-a6r"/>
+                        <outlet property="gobutton" destination="wQP-IH-bVk" id="K7a-oo-NGy"/>
+                        <outlet property="popUp" destination="gQI-YP-wl0" id="Sqq-OU-deF"/>
                         <outlet property="state" destination="CAR-SN-Skb" id="zuH-sL-eIx"/>
+                        <outlet property="view2" destination="gQI-YP-wl0" id="UPp-BH-cSR"/>
                         <outlet property="zip" destination="bBT-ht-OBk" id="WWp-Q0-Lcs"/>
                     </connections>
                 </viewController>
@@ -225,7 +241,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrowtriangle.forward.fill" catalog="system" width="128" height="113"/>
+        <image name="squareshape.fill" catalog="system" width="128" height="114"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -234,6 +250,9 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

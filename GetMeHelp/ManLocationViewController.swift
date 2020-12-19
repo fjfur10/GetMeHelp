@@ -18,6 +18,8 @@ class ManLocationViewController: UIViewController {
     @IBOutlet weak var city: UITextField!
     @IBOutlet weak var state: UITextField!
     @IBOutlet weak var zip: UITextField!
+    @IBOutlet weak var popUp: UIView!
+    @IBOutlet weak var gobutton: UIButton!
     
     var manualadd = [String:String]()
     
@@ -25,6 +27,11 @@ class ManLocationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        popUp.layer.cornerRadius = 20
+        popUp.clipsToBounds = true
+       
+        gobutton.layer.cornerRadius = 20
+        gobutton.clipsToBounds = true;
 
     }
     
