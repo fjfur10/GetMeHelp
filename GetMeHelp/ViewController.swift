@@ -8,8 +8,10 @@
 import UIKit
 import RadarSDK
 import CoreLocation
+import MapKit
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource  {
+
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate  {
     
     @IBOutlet weak var doneButton: UIButton!
     
@@ -18,16 +20,26 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var optionPicker: UIPickerView!
     
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet private var mapView: MKMapView!
 
+    @IBOutlet weak var zoomInButton: UIButton!
+    
     var locationManager = CLLocationManager()
     
+   
+    
     var pickerData = [String : String]()
+    var placescoords=[String: CLLocationCoordinate2D]()
+    let annotation = MKPointAnnotation()
+    
     var placeArr = [RadarPlace]()
     let test = ["Test"]
     var lat = 1.0
     var long = 1.0
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         pickerData = ["Doctors" : "doctor", "Medical Centers" : "medical-center", "Medical Services" : "medical-service", "Pharmacies" : "pharmacy"]
         // Ask for Authorisation from the User.
@@ -46,6 +58,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         optionPicker.dataSource = self
         optionPicker.delegate = self
         tableView.dataSource = self
+        tableView.delegate = self
         
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -74,15 +87,40 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.placeArr = places!
             for place in self.placeArr {
                 print(place.name)
+                self.placescoords.updateValue(place.location.coordinate, forKey: place.name)
             }
             self.tableView.reloadData()
             
         }
+        
+
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    @IBAction func zoomInButtonPressed(_ sender: Any) {
+        mapView.setZoomByDelta(delta: 0.5, animated: true)
+        
+
+    }
+    
+    @IBAction func zoomOutButtonPressed(_ sender: Any) {
+        
+        mapView.setZoomByDelta(delta: 2, animated: true)
+        
+
+    }
+    
+    @IBAction func homeButtonPressed(_ sender: Any) {
+        
+        let uloc = CLLocation(latitude: lat, longitude: long)
+         let regionradius:CLLocationDistance = 1000.0
+         let region = MKCoordinateRegion(center: uloc.coordinate, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
+         mapView.setRegion(region, animated: true)
+         mapView.delegate = self
+        
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")
@@ -103,6 +141,31 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
+
+        print(placescoords[ currentCell.textLabel!.text!]!)
+        
+        let thiscoor =  placescoords[ currentCell.textLabel!.text!]!
+        
+        
+        
+        let uloc = CLLocation(latitude: thiscoor.latitude, longitude: thiscoor.longitude)
+         let regionradius:CLLocationDistance = 1000.0
+         let region = MKCoordinateRegion(center: uloc.coordinate, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
+         mapView.setRegion(region, animated: true)
+         mapView.delegate = self
+        
+        
+        
+        annotation.coordinate = CLLocationCoordinate2D(latitude: thiscoor.latitude, longitude: thiscoor.longitude)
+         mapView.addAnnotation(annotation)
+      
+    }
+    
+    
     
 }
 
