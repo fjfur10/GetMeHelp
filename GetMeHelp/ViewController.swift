@@ -41,7 +41,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         
         
-        pickerData = ["Doctors" : "doctor", "Medical Centers" : "medical-center", "Medical Services" : "medical-service", "Pharmacies" : "pharmacy"]
+        pickerData = ["Doctors" : "doctor", "Medical Centers" : "medical-center", "Medical Services" : "medical-service", "Pharmacies" : "pharmacy", "Favorites" : "nil"]
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
 
@@ -59,8 +59,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         optionPicker.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        
-        
+        tableView.register(PlacesCell.self, forCellReuseIdentifier: "cellReuseIdentifier")
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -159,18 +158,23 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier")!
-                
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! PlacesCell
+        cell.linktoVC = self
         let text = placeArr[indexPath.row].name
-                
+        let placeLoc = placeArr[indexPath.row].location
+        var detail = ""
+        Radar.getDistance(origin: CLLocation(latitude: lat, longitude: long), destination: CLLocation(latitude: placeLoc.coordinate.latitude, longitude: placeLoc.coordinate.longitude), modes: RadarRouteMode.car, units: RadarRouteUnits.imperial) {(status, route) in
+            let myRoute = route!
+            detail = (myRoute.car?.distance.text)!
+        }
         cell.textLabel?.text = text
-                
+        cell.detailTextLabel?.text = detail
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let currentCell = tableView.cellForRow(at: indexPath)! as UITableViewCell
+        let currentCell = tableView.cellForRow(at: indexPath)! as! PlacesCell
 
         print(placescoords[ currentCell.textLabel!.text!]!)
         
