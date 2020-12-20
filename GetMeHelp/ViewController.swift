@@ -15,8 +15,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet weak var doneButton: UIButton!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var optionPicker: UIPickerView!
     
     @IBOutlet weak var tableView: UITableView!
@@ -54,8 +52,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
-        titleLabel.text = "GetMeHelp!"
-        titleLabel.isHidden = false
         optionPicker.dataSource = self
         optionPicker.delegate = self
         tableView.dataSource = self
@@ -195,8 +191,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! PlacesCell
-        cell.linktoVC = self
         let text = placeArr[indexPath.row].place.name
+        cell.linktoVC = self
         //cell.accessoryView?.tintColor = placeArr[indexPath.row].isFavorite ? UIColor.red : UIColor.blue
         cell.drawHeart(toDraw: placeArr[indexPath.row].isFavorite ? "heart.fill" : "heart")
         let placeLoc = placeArr[indexPath.row].place.location
