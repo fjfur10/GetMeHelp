@@ -11,7 +11,7 @@ import CoreLocation
 import MapKit
 import CoreData
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, DataEnteredDelegate{
+class ViewController: UIViewController, CLLocationManagerDelegate, DataEnteredDelegate {
     
     
     //Declaring outlets
@@ -94,9 +94,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.present(alert, animated: true)
     }
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
     
     //Button to fetch places
     @IBAction func didTouchDoneButton(_ sender: UIButton) {
@@ -209,11 +206,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
-  
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+
     
     @IBAction func zoomInButtonPressed(_ sender: Any) {
         mapView.setZoomByDelta(delta: 0.5, animated: true)
@@ -240,76 +233,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
     }
     
-    
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-            renderer.strokeColor = UIColor.blue
-            return renderer
-    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         print("locations = \(locValue.latitude) \(locValue.longitude)")
         lat = Double(locValue.latitude)
         long = Double(locValue.longitude)
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return placesNames.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! PlacesCell
-        let text = placesNames[indexPath.row]
-        cell.linktoVC = self
-        //cell.accessoryView?.tintColor = placeArr[indexPath.row].isFavorite ? UIColor.red : UIColor.blue
-        //checkFavorite
-        
-        cell.drawHeart(toDraw: getIsFavorited(name: placesNames[indexPath.row]) ? "heart.fill" : "heart")
-        cell.textLabel?.text = text
-        cell.textLabel?.font = UIFont(name: "GlacialIndifference-Regular", size: 16)
-        return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        let currentCell = tableView.cellForRow(at: indexPath)! as! PlacesCell
-        let thiscoor =  placescoords[currentCell.textLabel!.text!]!
-        
-        let regionradius:CLLocationDistance = 1000.0
-        let region = MKCoordinateRegion(center: thiscoor, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
-         mapView.setRegion(region, animated: true)
-         mapView.delegate = self
-        
-        annotation.coordinate = CLLocationCoordinate2D(latitude: thiscoor.latitude, longitude: thiscoor.longitude)
-        annotation.title = currentCell.textLabel?.text!
-        mapView.addAnnotation(annotation)
-        
-        //draw navigation lines
-        request.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), addressDictionary: nil))
-        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: thiscoor.latitude, longitude: thiscoor.longitude), addressDictionary: nil))
-               request.requestsAlternateRoutes = true
-               request.transportType = .automobile
-        
-        let directions = MKDirections(request: request)
-
-        directions.calculate { [unowned self] response, error in
-        guard let unwrappedResponse = response else { return }
-
-                    for route in unwrappedResponse.routes {
-                        self.mapView.removeOverlays(mapView.overlays)
-                        self.mapView.addOverlay(route.polyline)
-                    }
-        
-      
-                }
-    }
-    
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let data =  Array(pickerData.keys)
-        return data[row]
     }
     
     //places annotation on map of current location
@@ -374,19 +302,90 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         } catch let error as NSError {
           print("Could not save. \(error), \(error.userInfo)")
         }
-                //let hasFav = place.isFavorite
-        //placeArr[indexPath!.row].isFavorite = !hasFav
-        //print(placeArr[indexPath!.row])
-        /*if placeArr[indexPath!.row].isFavorite{
-            favorites.append(placeArr[indexPath!.row].place)
-        }
-        else {
-            favorites.remove(at: favorites.firstIndex(of: placeArr[indexPath!.row].place)!)
-        }*/
-        
-        //print(favorites)
         tableView.reloadData()
     }
     
 }
+extension ViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+            renderer.strokeColor = #colorLiteral(red: 0.968627451, green: 0.5803921569, blue: 0.1176470588, alpha: 1)
+            renderer.lineWidth = 5.0
+            return renderer
+    }
+}
+extension ViewController: UIPickerViewDataSource {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+}
+
+extension ViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let data =  Array(pickerData.keys)
+        return data[row]
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        let currentCell = tableView.cellForRow(at: indexPath)! as! PlacesCell
+        let thiscoor =  placescoords[currentCell.textLabel!.text!]!
+        
+        let regionradius:CLLocationDistance = 1000.0
+        let region = MKCoordinateRegion(center: thiscoor, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
+         mapView.setRegion(region, animated: true)
+         mapView.delegate = self
+        
+        annotation.coordinate = CLLocationCoordinate2D(latitude: thiscoor.latitude, longitude: thiscoor.longitude)
+        annotation.title = currentCell.textLabel?.text!
+        mapView.addAnnotation(annotation)
+        
+        //draw navigation lines
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), addressDictionary: nil))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: thiscoor.latitude, longitude: thiscoor.longitude), addressDictionary: nil))
+               request.requestsAlternateRoutes = true
+               request.transportType = .automobile
+        
+        let directions = MKDirections(request: request)
+
+        directions.calculate { [unowned self] response, error in
+        guard let unwrappedResponse = response else { return }
+
+                    for route in unwrappedResponse.routes {
+                        self.mapView.removeOverlays(mapView.overlays)
+                        self.mapView.addOverlay(route.polyline)
+                    }
+        
+      
+                }
+    }
+}
+
+extension ViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! PlacesCell
+        let text = placesNames[indexPath.row]
+        cell.linktoVC = self
+        //cell.accessoryView?.tintColor = placeArr[indexPath.row].isFavorite ? UIColor.red : UIColor.blue
+        //checkFavorite
+        
+        cell.drawHeart(toDraw: getIsFavorited(name: placesNames[indexPath.row]) ? "heart.fill" : "heart")
+        cell.textLabel?.text = text
+        cell.textLabel?.font = UIFont(name: "GlacialIndifference-Regular", size: 16)
+        return cell
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return placesNames.count
+    }
+}
+
 
