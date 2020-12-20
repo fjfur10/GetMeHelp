@@ -42,7 +42,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         
         
-        pickerData = ["Doctors" : "doctor", "Medical Centers" : "medical-center", "Medical Services" : "medical-service", "Pharmacies" : "pharmacy", "Favorites" : "nil"]
+        pickerData = ["Banks" : "bank", "Places to Eat" : "restaurant", "Grocery Store" : "food-grocery", "Places to Stay" : "hotel-lodging", "Doctor": "doctor", "Pharmacy": "pharmacy", "Library": "library", "Religous Centers": "religion", "Malls": "shopping-mall", "Gyms": "gym", "Favorites" : "nil"]
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
 
@@ -74,10 +74,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @IBAction func didTouchDoneButton(_ sender: UIButton) {
+
         if(!CLLocationManager.locationServicesEnabled())
         {
             locationAlert()
         }
+        
         let loc = CLLocation(latitude: lat, longitude: long)
         print(loc.coordinate.latitude)
         if(loc.coordinate.latitude == 1.0)
@@ -85,15 +87,41 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             locationAlert()
         }
         let vals = Array(pickerData.values)
+        
+        var rad = 5000
+        
+        while(findplaces(radius: rad, val: vals, myloc: loc) == false)
+        {
+            rad = rad + 1000
+            continue
+        }
+            
+        let uloc = CLLocation(latitude: lat, longitude: long)
+        let regionradius:CLLocationDistance = 5000.0
+        let region = MKCoordinateRegion(center: uloc.coordinate, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
+        mapView.setRegion(region, animated: true)
+        mapView.delegate = self
+        placeAnnotationHere()
+    }
+    
+    
+    func findplaces(radius: Int, val: [Dictionary<String, String>.Values.Element], myloc: CLLocation) -> Bool
+    {
+        var didit = true
         Radar.searchPlaces(
-          near: loc,
-          radius: 1000, // meters
-            chains: nil,
-            categories: [vals[optionPicker.selectedRow(inComponent: 0)]],
+          near: myloc,
+          radius: Int32(radius), // meters
+          chains: nil,
+          categories: [val[optionPicker.selectedRow(inComponent: 0)]],
           groups: nil,
           limit: 10
         ) { (status, location, places) in
             self.placeArr = [Place]()
+            if(self.placeArr.count == 0 && radius<7000){
+                didit = false
+                print("\n \(Int(radius))")
+                print("going again...")
+            }
           // do something with places
             for place in places! {
                 print(place.name)
@@ -110,12 +138,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
             self.tableView.reloadData()
         }
-        let uloc = CLLocation(latitude: lat, longitude: long)
-         let regionradius:CLLocationDistance = 5000.0
-         let region = MKCoordinateRegion(center: uloc.coordinate, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
-         mapView.setRegion(region, animated: true)
-         mapView.delegate = self
+        return didit;
     }
+    
+    
     
     func locationAlert()
     {
@@ -207,6 +233,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         mapView.addAnnotation(annotation)
         
         
+        
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), addressDictionary: nil))
         request.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: thiscoor.latitude, longitude: thiscoor.longitude), addressDictionary: nil))
                request.requestsAlternateRoutes = true
@@ -230,6 +257,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             renderer.strokeColor = UIColor.blue
             return renderer
         }
+    
+    func placeAnnotationHere(){
+        annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        annotation.title = "You Are Here"
+        mapView.addAnnotation(annotation)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender:Any?)
     {
