@@ -33,7 +33,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //array initializations
     var placeArr = [RadarPlace]()
     var addressesarray = [RadarAddress]()
-    var favorites = [RadarPlace]()
+    var placesNames = [String]()
     var dbPlaces: [NSManagedObject] = []
     
     //inital values
@@ -98,14 +98,25 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         {
             locationAlert()
         }
-        
-        //using Radar to find nearby places
-        let vals = Array(pickerData.values)
-        var rad = 5000
-        while(findplaces(radius: rad, val: vals, myloc: loc) == false) //keeps checking with a larger radius when no places are returned
-        {
-            rad = rad + 1000
-            continue
+        let keys = Array(pickerData.keys)
+        if keys[optionPicker.selectedRow(inComponent: 0)] == "Favorites" {
+            placesNames = [String]()
+            for i in 0..<self.dbPlaces.count {
+                if dbPlaces[i].value(forKey: "is_favorited") as? Bool == true {
+                    placesNames.append(dbPlaces[i].value(forKey: "name") as! String)
+                }
+            }
+            tableView.reloadData()
+        }
+        else {
+            //using Radar to find nearby places
+            let vals = Array(pickerData.values)
+            var rad = 5000
+            while(findplaces(radius: rad, val: vals, myloc: loc) == false) //keeps checking with a larger radius when no places are returned
+            {
+                rad = rad + 1000
+                continue
+            }
         }
             
         //updates map view
@@ -154,6 +165,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
           limit: 10
         ) { (status, location, places) in
             self.placeArr = [RadarPlace]()
+            self.placesNames = [String]()
             if(self.placeArr.count == 0 && radius<7000){
                 placesreturned = false
             }
@@ -173,11 +185,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 print(place.name)
                 self.placescoords.updateValue(place.location.coordinate, forKey: place.name)
                 self.placeArr.append(place)
+                self.placesNames.append(place.name)
                 
             }
             self.tableView.reloadData()
         }
-        return placesreturned;
+        return placesreturned
     }
     
     
@@ -233,27 +246,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         long = Double(locValue.longitude)
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return placeArr.count
+        return placesNames.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! PlacesCell
-        let text = placeArr[indexPath.row].name
+        let text = placesNames[indexPath.row]
         cell.linktoVC = self
         //cell.accessoryView?.tintColor = placeArr[indexPath.row].isFavorite ? UIColor.red : UIColor.blue
         //checkFavorite
         
-        cell.drawHeart(toDraw: getIsFavorited(Id: placeArr[indexPath.row]._id) ? "heart.fill" : "heart")
-        let placeLoc = placeArr[indexPath.row].location
-        var detail = ""
-        Radar.getDistance(origin: CLLocation(latitude: lat, longitude: long), destination: CLLocation(latitude: placeLoc.coordinate.latitude, longitude: placeLoc.coordinate.longitude), modes: RadarRouteMode.car, units: RadarRouteUnits.imperial) {(status, route) in
-            let myRoute = route!
-            detail = (myRoute.car?.distance.text)!
-        }
+        cell.drawHeart(toDraw: getIsFavorited(name: placesNames[indexPath.row]) ? "heart.fill" : "heart")
         cell.textLabel?.text = text
-        cell.detailTextLabel?.text = detail
         return cell
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
@@ -326,9 +331,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
         
-    func getIsFavorited(Id: String) -> Bool {
+    func getIsFavorited(name: String) -> Bool {
         for i in 0..<self.dbPlaces.count {
-            if dbPlaces[i].value(forKey: "id") as? String == Id {
+            if dbPlaces[i].value(forKey: "name") as? String == name {
                 return dbPlaces[i].value(forKey: "is_favorited") as! Bool
             }
         }
@@ -340,6 +345,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let indexPath = tableView.indexPath(for: cell)
         let place = placeArr[indexPath!.row]
         print(place)
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+            return
+          }
+          let managedContext =
+            appDelegate.persistentContainer.viewContext
         //fetch current isFavorited from db and update
         var fave = true
         for i in 0..<self.dbPlaces.count {
@@ -348,6 +359,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 dbPlaces[i].setValue(!fave, forKey: "is_favorited")
                 print("This is flipped from \(fave) to \(!fave)")
             }
+        }
+        do {
+          try managedContext.save()
+        } catch let error as NSError {
+          print("Could not save. \(error), \(error.userInfo)")
         }
                 //let hasFav = place.isFavorite
         //placeArr[indexPath!.row].isFavorite = !hasFav
