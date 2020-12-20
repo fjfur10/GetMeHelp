@@ -24,6 +24,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet private var mapView: MKMapView!
 
     var locationManager = CLLocationManager()
+    let request = MKDirections.Request()
     
    
     
@@ -149,7 +150,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             return
         }
         let uloc = CLLocation(latitude: lat, longitude: long)
-         let regionradius:CLLocationDistance = 5000.0
+        let regionradius:CLLocationDistance = 500.0
          let region = MKCoordinateRegion(center: uloc.coordinate, latitudinalMeters: regionradius, longitudinalMeters: regionradius)
          mapView.setRegion(region, animated: true)
          mapView.delegate = self
@@ -185,6 +186,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        mapView.removeOverlays(mapView.overlays)
+        
         let currentCell = tableView.cellForRow(at: indexPath)! as! PlacesCell
 
         print(placescoords[ currentCell.textLabel!.text!]!)
@@ -202,8 +205,31 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         annotation.coordinate = CLLocationCoordinate2D(latitude: thiscoor.latitude, longitude: thiscoor.longitude)
         annotation.title = currentCell.textLabel?.text!
         mapView.addAnnotation(annotation)
+        
+        
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), addressDictionary: nil))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: thiscoor.latitude, longitude: thiscoor.longitude), addressDictionary: nil))
+               request.requestsAlternateRoutes = true
+               request.transportType = .automobile
+        
+        let directions = MKDirections(request: request)
+
+                directions.calculate { [unowned self] response, error in
+                    guard let unwrappedResponse = response else { return }
+
+                    for route in unwrappedResponse.routes {
+                        self.mapView.addOverlay(route.polyline)
+                    }
+        
       
+                }
     }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+            renderer.strokeColor = UIColor.blue
+            return renderer
+        }
     
     override func prepare(for segue: UIStoryboardSegue, sender:Any?)
     {
@@ -242,6 +268,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         print(favorites)
         tableView.reloadData()
     }
+    
     
 }
 
