@@ -28,6 +28,7 @@ class PlacesCell: UITableViewCell {
     func drawHeart(toDraw: String) {
         heartButton.setImage(UIImage(systemName: toDraw), for: .normal)
         heartButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        heartButton.tintColor = #colorLiteral(red: 0.968627451, green: 0.5803921569, blue: 0.1176470588, alpha: 1)
         heartButton.addTarget(self, action: #selector(handleFavoriteAction), for: .touchUpInside)
         accessoryView = heartButton
     }

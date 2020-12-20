@@ -78,6 +78,7 @@
 		9932A85D258ED728000E4F99 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 		9932A877258EF3D5000E4F99 /* GlacialIndifference-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Bold.otf"; sourceTree = "<group>"; };
 		9932A88B258F04C8000E4F99 /* DataSet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataSet.xcdatamodel; sourceTree = "<group>"; };
+		9DCA92A4258F46DA00CBC9B8 /* GlacialIndifference-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Regular.otf"; sourceTree = "<group>"; };
 		9DE0FE19258DE62F00E5F140 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		9DE0FE1D258E0ACC00E5F140 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		9DE0FE22258E693B00E5F140 /* ManLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManLocationViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +139,7 @@
 				990919C1258DAA5D001DFBBD /* AppDelegate.swift */,
 				990919C3258DAA5D001DFBBD /* SceneDelegate.swift */,
 				9932A877258EF3D5000E4F99 /* GlacialIndifference-Bold.otf */,
+				9DCA92A4258F46DA00CBC9B8 /* GlacialIndifference-Regular.otf */,
 				990919C5258DAA5D001DFBBD /* ViewController.swift */,
 				9932A82E258E71E8000E4F99 /* PlacesCell.swift */,
 				990919C7258DAA5D001DFBBD /* Main.storyboard */,

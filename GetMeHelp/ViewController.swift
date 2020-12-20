@@ -28,7 +28,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
    
     
     var placescoords=[String: CLLocationCoordinate2D]() //dictionary of places matched to their coordinates
-    let pickerData = ["Banks" : "bank", "Places to Eat" : "restaurant", "Grocery Store" : "food-grocery", "Places to Stay" : "hotel-lodging", "Doctor": "doctor", "Pharmacy": "pharmacy", "Library": "library", "Religous Centers": "religion", "Malls": "shopping-mall", "Gyms": "gym", "Favorites" : "nil"] //dictionary of id's for SDK
+    let pickerData = ["Banks" : "bank", "Places to Eat" : "restaurant", "Grocery Store" : "food-grocery", "Places to Stay" : "hotel-lodging", "Doctor": "doctor", "Pharmacy": "pharmacy", "Library": "library", "Religous Centers": "religion", "Malls": "shopping-mall", "Gyms": "gym", "Transportation":"travel-transportation", "Laundry": "laundromat", "Favorites" : "nil"] //dictionary of id's for SDK
     
     //array initializations
     var placeArr = [RadarPlace]()
@@ -61,6 +61,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         tableView.dataSource = self
        
         tableView.register(PlacesCell.self, forCellReuseIdentifier: "cellReuseIdentifier")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +70,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         UIApplication.shared.delegate as? AppDelegate else {
           return
       }
+        
       
       let managedContext =
         appDelegate.persistentContainer.viewContext
@@ -85,6 +87,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
 
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let alert = UIAlertController(title: "How To Use", message: "To find popular services near you, select a catagory and tap the search button. Tap any of the results to update map.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -257,6 +265,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         cell.drawHeart(toDraw: getIsFavorited(name: placesNames[indexPath.row]) ? "heart.fill" : "heart")
         cell.textLabel?.text = text
+        cell.textLabel?.font = UIFont(name: "GlacialIndifference-Regular", size: 16)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -343,7 +352,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //toggle heart
     func flipFavorite(cell: UITableViewCell){
         let indexPath = tableView.indexPath(for: cell)
-        let place = placeArr[indexPath!.row]
+        let place = placesNames[indexPath!.row]
         print(place)
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
@@ -354,7 +363,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //fetch current isFavorited from db and update
         var fave = true
         for i in 0..<self.dbPlaces.count {
-            if dbPlaces[i].value(forKey: "id") as? String == place._id {
+            if dbPlaces[i].value(forKey: "name") as? String == place{
                 fave = dbPlaces[i].value(forKey: "is_favorited") as! Bool
                 dbPlaces[i].setValue(!fave, forKey: "is_favorited")
                 print("This is flipped from \(fave) to \(!fave)")
