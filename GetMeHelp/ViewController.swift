@@ -9,7 +9,7 @@ import UIKit
 import RadarSDK
 import CoreLocation
 import MapKit
-
+import CoreData
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, DataEnteredDelegate{
     
