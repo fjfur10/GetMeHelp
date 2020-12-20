@@ -20,6 +20,7 @@ class PlacesCell: UITableViewCell {
     
     @objc private func handleFavoriteAction() {
         linktoVC?.flipFavorite(cell: self)
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
