@@ -3,10 +3,16 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GlacialIndifference-Bold.otf">
+            <string>GlacialIndifference-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -22,39 +28,63 @@
                                     <constraint firstAttribute="height" constant="243" id="ipf-SW-CD8"/>
                                 </constraints>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehg-cp-VCO">
-                                <rect key="frame" x="48" y="348" width="30" height="43"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="+"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehg-cp-VCO">
+                                <rect key="frame" x="40" y="349.33333333333331" width="38" height="35.666666666666686"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="38" id="5eq-0R-GpX"/>
+                                    <constraint firstAttribute="height" constant="38" id="wYJ-df-nja"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="42"/>
+                                <color key="tintColor" red="0.14901960780000001" green="0.1333333333" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.14901960780000001" green="0.1333333333" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <imageReference key="backgroundImage" image="plus.magnifyingglass" catalog="system" symbolScale="medium"/>
+                                </state>
                                 <connections>
                                     <action selector="didTouchDoneButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iP4-Ou-WXs"/>
                                     <action selector="zoomInButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="drY-bN-ZNN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qab-Wm-9FR">
-                                <rect key="frame" x="101" y="356" width="30" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                <state key="normal" title="-"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qab-Wm-9FR">
+                                <rect key="frame" x="101" y="349.33333333333331" width="38" height="35.666666666666686"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="38" id="aHI-nb-z12"/>
+                                    <constraint firstAttribute="height" constant="38" id="iJG-Qc-mJ0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="40"/>
+                                <color key="tintColor" red="0.14901960780000001" green="0.1333333333" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" backgroundImage="minus.magnifyingglass" catalog="system">
+                                    <color key="titleColor" red="0.14901960780000001" green="0.1333333333" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="zoomOutButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KgK-7z-jLR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSt-8b-bnb">
-                                <rect key="frame" x="256" y="348" width="77" height="53"/>
-                                <state key="normal" title="Back to Me"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSt-8b-bnb">
+                                <rect key="frame" x="215" y="348" width="112" height="54"/>
+                                <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="17"/>
+                                <color key="tintColor" red="0.96862745100000003" green="0.58039215690000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Back to Me" image="location.circle.fill" catalog="system">
+                                    <color key="titleColor" red="0.14901960780000001" green="0.1333333333" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.14901960780000001" green="0.1333333333" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="homeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gEf-w3-bJg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRq-fY-PUx">
                                 <rect key="frame" x="112" y="794" width="167" height="32"/>
-                                <state key="normal" title="Add Location Manually"/>
+                                <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="15"/>
+                                <state key="normal" title="Add Location Manually">
+                                    <color key="titleColor" red="0.14901960780000001" green="0.1333333333" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="UqJ-mE-DaA" kind="presentation" identifier="toManualInput" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="f81-dT-I7S"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="76G-M3-0ak">
-                                <rect key="frame" x="0.0" y="401" width="379" height="174"/>
+                            <pickerView contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="76G-M3-0ak">
+                                <rect key="frame" x="0.0" y="386" width="379" height="189"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="daX-T9-SY1">
                                 <rect key="frame" x="16" y="621" width="358" height="168"/>
@@ -62,6 +92,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="168" id="j7F-AM-tsd"/>
                                 </constraints>
+                                <color key="sectionIndexColor" red="0.96862745100000003" green="0.58039215690000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellReuseIdentifier" id="dew-9n-TUn">
                                         <rect key="frame" x="0.0" y="28" width="358" height="43.666667938232422"/>
@@ -73,40 +104,67 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgg-LC-azy">
-                                <rect key="frame" x="137" y="583" width="117" height="30"/>
-                                <state key="normal" title="Show Me Places!"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cgg-LC-azy">
+                                <rect key="frame" x="117" y="587" width="157" height="22"/>
+                                <color key="backgroundColor" red="0.14901960780000001" green="0.1333333333" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="rCd-EL-iDA"/>
+                                </constraints>
+                                <color key="tintColor" red="0.96862745100000003" green="0.58039215690000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Show Me Places!" image="location.circle.fill" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didTouchDoneButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cag-9N-gab"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NewInTown!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paE-Zg-2do">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="105"/>
+                                <color key="backgroundColor" red="0.14901960784313725" green="0.13333333333333333" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="76G-M3-0ak" firstAttribute="bottom" secondItem="Cgg-LC-azy" secondAttribute="top" id="00o-LJ-6t4"/>
+                            <constraint firstItem="Cgg-LC-azy" firstAttribute="leading" secondItem="XRq-fY-PUx" secondAttribute="leading" id="18J-v5-9ey"/>
                             <constraint firstItem="rSt-8b-bnb" firstAttribute="top" secondItem="nM2-zr-qsn" secondAttribute="bottom" id="3ui-6R-npB"/>
+                            <constraint firstItem="Cgg-LC-azy" firstAttribute="top" secondItem="76G-M3-0ak" secondAttribute="bottom" constant="8" symbolic="YES" id="6g1-zQ-fEi"/>
                             <constraint firstItem="nM2-zr-qsn" firstAttribute="leading" secondItem="76G-M3-0ak" secondAttribute="leading" id="7Sn-Zk-jS6"/>
+                            <constraint firstItem="paE-Zg-2do" firstAttribute="bottom" secondItem="nM2-zr-qsn" secondAttribute="top" id="7VP-Gi-Lk3"/>
                             <constraint firstItem="Qab-Wm-9FR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="101" id="7Yn-ry-8xd"/>
                             <constraint firstItem="daX-T9-SY1" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="8P2-aL-BMn"/>
                             <constraint firstAttribute="bottomMargin" secondItem="XRq-fY-PUx" secondAttribute="bottom" constant="-9" id="D5u-Zg-4jC"/>
-                            <constraint firstAttribute="centerX" secondItem="Cgg-LC-azy" secondAttribute="centerX" id="PXW-ay-W9h"/>
+                            <constraint firstItem="Qab-Wm-9FR" firstAttribute="top" secondItem="ehg-cp-VCO" secondAttribute="top" id="ECE-7B-xTK"/>
                             <constraint firstItem="76G-M3-0ak" firstAttribute="top" secondItem="ehg-cp-VCO" secondAttribute="bottom" id="SwF-09-crw"/>
+                            <constraint firstItem="paE-Zg-2do" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WSM-R9-dDo"/>
                             <constraint firstItem="ehg-cp-VCO" firstAttribute="top" secondItem="nM2-zr-qsn" secondAttribute="bottom" id="Wtg-15-Lao"/>
                             <constraint firstItem="Qab-Wm-9FR" firstAttribute="leading" secondItem="ehg-cp-VCO" secondAttribute="trailing" constant="23" id="Y2J-WK-Weg"/>
                             <constraint firstItem="daX-T9-SY1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YUg-ov-McR"/>
+                            <constraint firstItem="paE-Zg-2do" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Z9n-fq-rif"/>
                             <constraint firstItem="rSt-8b-bnb" firstAttribute="bottom" secondItem="76G-M3-0ak" secondAttribute="top" id="Zv7-v2-5x2"/>
                             <constraint firstItem="XRq-fY-PUx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="112" id="csK-a6-mXq"/>
                             <constraint firstItem="Qab-Wm-9FR" firstAttribute="bottom" secondItem="76G-M3-0ak" secondAttribute="top" id="dB7-dH-cw7"/>
+                            <constraint firstItem="Cgg-LC-azy" firstAttribute="trailing" secondItem="XRq-fY-PUx" secondAttribute="trailing" id="dzZ-hA-GvI"/>
+                            <constraint firstItem="daX-T9-SY1" firstAttribute="top" secondItem="Cgg-LC-azy" secondAttribute="bottom" constant="8" symbolic="YES" id="eBR-Tn-yfT"/>
                             <constraint firstItem="nM2-zr-qsn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="61" id="edI-wr-CrJ"/>
+                            <constraint firstItem="paE-Zg-2do" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="eue-YS-aQz"/>
+                            <constraint firstItem="paE-Zg-2do" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="iaR-UY-9P9"/>
                             <constraint firstItem="nM2-zr-qsn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="j2j-Ib-zvo"/>
                             <constraint firstItem="Qab-Wm-9FR" firstAttribute="top" secondItem="nM2-zr-qsn" secondAttribute="bottom" id="nnd-Hc-HsR"/>
                             <constraint firstItem="XRq-fY-PUx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pft-FG-O4H"/>
+                            <constraint firstItem="Qab-Wm-9FR" firstAttribute="bottom" secondItem="ehg-cp-VCO" secondAttribute="bottom" id="rhM-yp-J3W"/>
                             <constraint firstItem="76G-M3-0ak" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="rxK-Zw-ZZd"/>
                             <constraint firstItem="XRq-fY-PUx" firstAttribute="top" secondItem="daX-T9-SY1" secondAttribute="bottom" id="s72-SU-ahl"/>
                             <constraint firstItem="76G-M3-0ak" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-5.5" id="v8w-3c-ZJB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rSt-8b-bnb" secondAttribute="trailing" constant="57" id="vBT-Do-DQ2"/>
-                            <constraint firstItem="daX-T9-SY1" firstAttribute="top" secondItem="Cgg-LC-azy" secondAttribute="bottom" id="wGa-3y-Oto"/>
                         </constraints>
                     </view>
                     <connections>
@@ -143,36 +201,36 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Street Line 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyg-k5-efO">
                                             <rect key="frame" x="102" y="26" width="95" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPD-5U-136">
-                                            <rect key="frame" x="134" y="190" width="31" height="21"/>
+                                            <rect key="frame" x="134" y="190" width="32" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDT-sV-qLC">
                                             <rect key="frame" x="47" y="272" width="47" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Zip Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIV-9Y-VKN">
-                                            <rect key="frame" x="182" y="272" width="70" height="21"/>
+                                            <rect key="frame" x="182" y="272" width="72" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Street Line 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7D-D1-qL2">
-                                            <rect key="frame" x="101" y="105" width="97" height="21"/>
+                                            <rect key="frame" x="101" y="105" width="99" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="68p-3r-7Vw">
@@ -208,9 +266,10 @@
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQP-IH-bVk">
                                             <rect key="frame" x="110" y="350.66666666666674" width="79" height="42"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="tintColor" systemColor="systemGreenColor"/>
+                                            <fontDescription key="fontDescription" name="GlacialIndifference-Bold" family="Glacial Indifference" pointSize="17"/>
+                                            <color key="tintColor" red="0.96862745100000003" green="0.58039215690000001" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="Go!" backgroundImage="squareshape.fill" catalog="system">
-                                                <color key="titleColor" systemColor="labelColor"/>
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
@@ -218,7 +277,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                    <color key="backgroundColor" red="0.14901960780000001" green="0.1333333333" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <constraints>
@@ -252,18 +311,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="location.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="minus.magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="plus.magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="squareshape.fill" catalog="system" width="128" height="114"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

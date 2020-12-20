@@ -208,7 +208,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        mapView.removeOverlays(mapView.overlays)
         
         let currentCell = tableView.cellForRow(at: indexPath)! as! PlacesCell
 
@@ -241,6 +240,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                     guard let unwrappedResponse = response else { return }
 
                     for route in unwrappedResponse.routes {
+                        self.mapView.removeOverlays(mapView.overlays)
                         self.mapView.addOverlay(route.polyline)
                     }
         

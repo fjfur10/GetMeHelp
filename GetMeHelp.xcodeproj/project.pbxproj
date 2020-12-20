@@ -23,6 +23,8 @@
 		9932A860258ED728000E4F99 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9932A859258ED728000E4F99 /* FMDatabaseQueue.m */; };
 		9932A861258ED728000E4F99 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9932A85A258ED728000E4F99 /* FMResultSet.m */; };
 		9932A862258ED728000E4F99 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9932A85D258ED728000E4F99 /* FMDatabasePool.m */; };
+		9932A878258EF3D5000E4F99 /* GlacialIndifference-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9932A877258EF3D5000E4F99 /* GlacialIndifference-Bold.otf */; };
+		9932A88C258F04C8000E4F99 /* DataSet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9932A88A258F04C8000E4F99 /* DataSet.xcdatamodeld */; };
 		9DE0FE1E258E0ACC00E5F140 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE0FE1D258E0ACC00E5F140 /* File.swift */; };
 		9DE0FE23258E693B00E5F140 /* ManLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE0FE22258E693B00E5F140 /* ManLocationViewController.swift */; };
 /* End PBXBuildFile section */
@@ -74,6 +76,8 @@
 		9932A85B258ED728000E4F99 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		9932A85C258ED728000E4F99 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		9932A85D258ED728000E4F99 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		9932A877258EF3D5000E4F99 /* GlacialIndifference-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlacialIndifference-Bold.otf"; sourceTree = "<group>"; };
+		9932A88B258F04C8000E4F99 /* DataSet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataSet.xcdatamodel; sourceTree = "<group>"; };
 		9DE0FE19258DE62F00E5F140 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		9DE0FE1D258E0ACC00E5F140 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		9DE0FE22258E693B00E5F140 /* ManLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManLocationViewController.swift; sourceTree = "<group>"; };
@@ -133,9 +137,11 @@
 				9932A84E258ED6A8000E4F99 /* FMDB */,
 				990919C1258DAA5D001DFBBD /* AppDelegate.swift */,
 				990919C3258DAA5D001DFBBD /* SceneDelegate.swift */,
+				9932A877258EF3D5000E4F99 /* GlacialIndifference-Bold.otf */,
 				990919C5258DAA5D001DFBBD /* ViewController.swift */,
 				9932A82E258E71E8000E4F99 /* PlacesCell.swift */,
 				990919C7258DAA5D001DFBBD /* Main.storyboard */,
+				9932A88A258F04C8000E4F99 /* DataSet.xcdatamodeld */,
 				990919CA258DAA5E001DFBBD /* Assets.xcassets */,
 				990919CC258DAA5E001DFBBD /* LaunchScreen.storyboard */,
 				990919CF258DAA5E001DFBBD /* Info.plist */,
@@ -287,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9932A878258EF3D5000E4F99 /* GlacialIndifference-Bold.otf in Resources */,
 				990919CE258DAA5E001DFBBD /* LaunchScreen.storyboard in Resources */,
 				990919CB258DAA5E001DFBBD /* Assets.xcassets in Resources */,
 				990919C9258DAA5D001DFBBD /* Main.storyboard in Resources */,
@@ -318,6 +325,7 @@
 				9932A862258ED728000E4F99 /* FMDatabasePool.m in Sources */,
 				9DE0FE1E258E0ACC00E5F140 /* File.swift in Sources */,
 				9932A82F258E71E8000E4F99 /* PlacesCell.swift in Sources */,
+				9932A88C258F04C8000E4F99 /* DataSet.xcdatamodeld in Sources */,
 				9932A85F258ED728000E4F99 /* FMDatabase.m in Sources */,
 				990919C2258DAA5D001DFBBD /* AppDelegate.swift in Sources */,
 				9932A860258ED728000E4F99 /* FMDatabaseQueue.m in Sources */,
@@ -671,6 +679,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9932A88A258F04C8000E4F99 /* DataSet.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9932A88B258F04C8000E4F99 /* DataSet.xcdatamodel */,
+			);
+			currentVersion = 9932A88B258F04C8000E4F99 /* DataSet.xcdatamodel */;
+			path = DataSet.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 990919B6258DAA5D001DFBBD /* Project object */;
 }

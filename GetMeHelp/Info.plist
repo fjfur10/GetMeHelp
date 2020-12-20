@@ -59,6 +59,10 @@
 	<string>Application Wants To Use Your Location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Application Wants To Use Your Location</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>GlacialIndifference-Bold.otf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
